@@ -18,7 +18,6 @@ const getAllImg = async (req, res) => {
 
 const postImage = async (req, res) => {
     const { link, label } = req.body
-    const image = await Image.create({ link, label })
 
     // Check for duplicate title
     const duplicate = await Image.findOne({ link }).lean().exec()
@@ -27,11 +26,14 @@ const postImage = async (req, res) => {
         return res.status(409).json({ message: 'Image already exists' })
     }
 
-    if (image) {
-        return res.status(201).json({ message: 'New image added' })
-    } else {
-        return res.status(400).json({ message: 'Invalid image data recieved' })
-    }
+    const image = await Image.create({ link, label })
+        .then(() => {
+            res.status(201).json({ message: 'New image added' })
+        })
+        .catch((err) => {
+            console.log(err._message)
+            return res.status(400).json({ message: 'Invalid image data recieved' })
+        })
 }
 
 // @desc delets an image
