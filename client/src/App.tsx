@@ -1,34 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState, createContext } from 'react'
+import AddPhotoModal from './components/AddPhotoModal'
+import Header from "./components/Header"
+import Masonry from './components/Masonry'
+import Modal from './components/Modal'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+type AppContext = {
+  addPhotoModal: boolean,
+  setAddPhotoModal: React.Dispatch<React.SetStateAction<boolean>>,
+  deleteModal: boolean,
+  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+const ContextState = {
+  addPhotoModal: false,
+  setAddPhotoModal: () => { },
+  deleteModal: false,
+  setDeleteModal: () => { }
+}
+
+export const AppContext = createContext<AppContext>(ContextState)
+
+const App = () => {
+  const [addPhotoModal, setAddPhotoModal] = useState<boolean>(false)
+  const [deleteModal, setDeleteModal] = useState<boolean>(false)
+
+  return (
+
+    <AppContext.Provider
+      value={{
+        addPhotoModal,
+        setAddPhotoModal,
+        deleteModal,
+        setDeleteModal
+      }}
+    >
+      <div className="relative pb-10">
+        <Modal />
+        <Header />
+        <Masonry />
+      </div>
+    </AppContext.Provider>
+  )
+}
 export default App
