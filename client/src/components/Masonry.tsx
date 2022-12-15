@@ -7,7 +7,6 @@ const Masonry = () => {
 
     const handleClick = () => {
         setDeleteModal(!deleteModal)
-        console.log(deleteModal)
     }
 
     const imgLinks = [
@@ -27,7 +26,7 @@ const Masonry = () => {
         <div className="grid-container px-20">
             {imgLinks.map((img) => (
                 <figure className="hover-img">
-                    <img src={img.link} alt="Image" />
+                    <img className="red-b" src={img.link} alt="Image" />
                     <figcaption className="py-4 px-5">
                         <button
                             onClick={handleClick}

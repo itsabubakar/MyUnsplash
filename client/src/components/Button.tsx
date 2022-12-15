@@ -17,7 +17,6 @@ const Button = ({ text, bg }: Button) => {
 
     const handleClick = (): void => {
         setAddPhotoModal(!addPhotoModal)
-        console.log(addPhotoModal);
     }
     return (
         <button

@@ -12,3 +12,13 @@ I have a an express server setup with routes and controllers. Models and schema 
 
 ### Frontend
 I have vite setup with react typescript.
+
+### Frontend layout
+- Masonry image layout
+- Modal for adding pictures 
+- Hover to see label and delete btn
+- Modal for delete btn
+
+## Goals
+1. Build a project using typescript
+2. Deploy on render

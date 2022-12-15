@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 img {
-  border-radius: 30px;
   height: 100%;
   width: 100%;
   box-shadow: 0px 5px 25px -5px rgba(0, 0, 0, 0.568);
 }
 
-img:nth-child(5n -3) {
-  border: 2px solid rgb(207, 5, 5);
-  grid-row: span 2;
-}
+/* .test {
+  background-color: #00000009;
+} */
+
+
 
 .grid-container {
     display: grid;
@@ -85,4 +85,9 @@ img:nth-child(5n -3) {
 
 .hover-img:hover figcaption {
   opacity: 1;
+}
+
+.hover-img:nth-child(5n -3) {
+  border: 2px solid rgb(207, 5, 5);
+  grid-row: span 2;
 }
