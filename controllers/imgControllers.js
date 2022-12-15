@@ -19,6 +19,8 @@ const getAllImg = async (req, res) => {
 const postImage = async (req, res) => {
     const { link, label } = req.body
 
+    // console.log(link, label)
+
     // Check for duplicate title
     const duplicate = await Image.findOne({ link }).lean().exec()
 

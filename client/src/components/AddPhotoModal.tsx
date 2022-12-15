@@ -1,5 +1,8 @@
 import { useContext, useState } from "react"
 import { AppContext } from "../App"
+import axios from "axios"
+
+// https://images.unsplash.com/photo-1671036810802-379ec0c402d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60
 
 const AddPhotoModal = () => {
     const { addPhotoModal, setAddPhotoModal } = useContext(AppContext)
@@ -23,7 +26,8 @@ const AddPhotoModal = () => {
 
     // sets url state
     const handleUrlChange = (e: any) => {
-        setUrl(e.target.value)
+        let urlStr = e.target.value.trim()
+        setUrl(urlStr)
     }
 
     // check link passes
@@ -37,20 +41,34 @@ const AddPhotoModal = () => {
             console.log('comparison happening')
         } else {
             console.log('Not what ai want')
+            setFromUnsplash(true)
+            let timer = setTimeout(() => {
+                setFromUnsplash(false)
+            }, 1500);
+
+            return () => clearTimeout(timer)
         }
+    }
 
-        // setFromUnsplash(true)
-        // let timer = setTimeout(() => {
-        //     setFromUnsplash(false)
-        // }, 1500);
-
-        // return () => clearTimeout(timer)
+    // post data to db
+    const postData = async () => {
+        const link = url
+        const apiLink = 'http://localhost:8080/api'
+        const data = {
+            label, link
+        }
+        const response = await axios.post(apiLink, data)
+            .then((resp) => {
+                console.log(resp.data)
+            })
+            .catch((err) => {
+                console.log(err.response.data)
+            })
     }
 
     // handles form submission
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        linkFromUnsplash()
 
 
         if (!label) {
@@ -58,19 +76,23 @@ const AddPhotoModal = () => {
             let timer = setTimeout(() => {
                 setLabelError(false)
             }, 1500);
-
-            return () => clearTimeout(timer)
         }
 
         if (!url) {
-            console.log(url)
-
             setUrlError(true)
             let timer = setTimeout(() => {
                 setUrlError(false)
             }, 1500);
+        }
 
-            return () => clearTimeout(timer)
+        if (url) {
+            linkFromUnsplash()
+        }
+
+        // Post the link and label to the db
+        if (url && label) {
+            console.log('Posting');
+            postData()
         }
 
 
