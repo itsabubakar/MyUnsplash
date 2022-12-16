@@ -3,19 +3,41 @@ import AddPhotoModal from './components/AddPhotoModal'
 import Header from "./components/Header"
 import Masonry from './components/Masonry'
 import Modal from './components/Modal'
+import axios from 'axios'
+
+interface ImageData {
+  _id: string;
+  label: string;
+  link: string;
+}
 
 type AppContext = {
   addPhotoModal: boolean,
   setAddPhotoModal: React.Dispatch<React.SetStateAction<boolean>>,
   deleteModal: boolean,
-  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
+  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>,
+  loading: boolean,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  images: Array<ImageData>,
+  setImages: React.Dispatch<React.SetStateAction<ImageData[]>>,
+  fetchImages: any,
+  deleteId: string,
+  setDeleteId: React.Dispatch<React.SetStateAction<string>>
 }
 
 const ContextState = {
   addPhotoModal: false,
   setAddPhotoModal: () => { },
   deleteModal: false,
-  setDeleteModal: () => { }
+  setDeleteModal: () => { },
+  loading: false,
+  setLoading: () => { },
+  images: [],
+  setImages: () => { },
+  fetchImages: () => { },
+  deleteId: '',
+  setDeleteId: () => { }
+
 }
 
 export const AppContext = createContext<AppContext>(ContextState)
@@ -23,6 +45,25 @@ export const AppContext = createContext<AppContext>(ContextState)
 const App = () => {
   const [addPhotoModal, setAddPhotoModal] = useState<boolean>(false)
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [images, setImages] = useState<ImageData[]>([])
+  const [deleteId, setDeleteId] = useState<string>('')
+
+  const fetchImages = async () => {
+
+    const apiLink = 'http://localhost:8080/api'
+
+    const response = await axios.get(apiLink)
+      .then((resp) => {
+        // reversing the array so the last pops first
+        setImages(resp.data.reverse())
+      })
+      .catch((err) => {
+        // remove loading screen
+        console.log(err.response.data)
+      })
+  }
+
 
   return (
 
@@ -31,7 +72,14 @@ const App = () => {
         addPhotoModal,
         setAddPhotoModal,
         deleteModal,
-        setDeleteModal
+        setDeleteModal,
+        loading,
+        setLoading,
+        images,
+        setImages,
+        fetchImages,
+        deleteId,
+        setDeleteId
       }}
     >
       <div className="relative pb-10">

@@ -44,12 +44,12 @@ const postImage = async (req, res) => {
 const deleteImg = async (req, res) => {
     const { id } = req.body
 
-    // Confirm data
+    // // Confirm data
     if (!id) {
         return res.status(400).json({ message: 'Image id required' })
     }
 
-    // Confirm image exists to delete 
+    // // Confirm image exists to delete 
     const image = await Image.findById(id).exec()
 
     if (!image) {

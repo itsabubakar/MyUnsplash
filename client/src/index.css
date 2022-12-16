@@ -15,13 +15,6 @@ img {
 
 
 
-.grid-container {
-    display: grid;
-    grid-auto-rows: 280px; 
-    grid-gap: 50px;
-    grid-template-columns: repeat(3, 1fr);   
-}
-
 .hover-img {
   border-radius: 30px;
   color: #fff;
@@ -89,6 +82,5 @@ img {
 }
 
 .hover-img:nth-child(5n -3) {
-  border: 2px solid rgb(207, 5, 5);
   grid-row: span 2;
 }
