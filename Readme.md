@@ -8,7 +8,7 @@
 
 ## Process
 ### Backend
-I have a an express server setup with routes and controllers. Models and schema set up connected to mongo db, and using mongoose default validation.
+I have an express server setup with routes and controllers. Models and schema set up connected to mongo db, and using mongoose default validation.
 
 ### Frontend
 I have vite setup with react typescript.
