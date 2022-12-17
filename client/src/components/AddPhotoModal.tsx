@@ -59,7 +59,7 @@ const AddPhotoModal = () => {
     // post data to db
     const postData = async () => {
         const link = url
-        const apiLink = 'http://localhost:8080/api'
+        const apiLink = '/api'
         const data = {
             label, link
         }
