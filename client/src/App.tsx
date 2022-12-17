@@ -23,6 +23,10 @@ type AppContext = {
   fetchImages: any,
   deleteId: string,
   setDeleteId: React.Dispatch<React.SetStateAction<string>>
+  searchBox: string,
+  setSearchBox: React.Dispatch<React.SetStateAction<string>>,
+  setNoImagesFound: React.Dispatch<React.SetStateAction<boolean>>,
+  noImagesFound: boolean
 }
 
 const ContextState = {
@@ -36,7 +40,11 @@ const ContextState = {
   setImages: () => { },
   fetchImages: () => { },
   deleteId: '',
-  setDeleteId: () => { }
+  setDeleteId: () => { },
+  searchBox: '',
+  setSearchBox: () => { },
+  noImagesFound: false,
+  setNoImagesFound: () => { },
 
 }
 
@@ -48,6 +56,8 @@ const App = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [images, setImages] = useState<ImageData[]>([])
   const [deleteId, setDeleteId] = useState<string>('')
+  const [searchBox, setSearchBox] = useState<string>('')
+  const [noImagesFound, setNoImagesFound] = useState<boolean>(false)
 
   const fetchImages = async () => {
 
@@ -79,7 +89,11 @@ const App = () => {
         setImages,
         fetchImages,
         deleteId,
-        setDeleteId
+        setDeleteId,
+        searchBox,
+        setSearchBox,
+        setNoImagesFound,
+        noImagesFound
       }}
     >
       <div className="relative pb-10">

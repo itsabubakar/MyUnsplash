@@ -36,19 +36,14 @@ const DeleteModal = () => {
 
     return (
         <div className={`${deleteModal ? 'absolute bg-[#00000085] w-full min-h-screen h-full grid justify-center  z-10' : 'hidden'}`}>
-            <div className="top-[20vh] left-[25vw] fixed bg-white h-[180px] py-5 px-6 rounded-md w-[400px]">
+            <div className="top-[20vh] left-[calc(50%-140px)] fixed bg-white h-[140px] py-5 px-6 rounded-md w-[300px]">
                 {loading && <Loading />}
-                {!loading && <div>
-                    <h2 className="font-semibold">Are you sure?</h2>
-                    <form className="my-2">
-                        <label htmlFor="delete">
-                            <p className="text-sm text-gray-700 mb-2">Enter the label to delete</p>
-                            <input className="rounded-md  px-3 py-2  text-sm border border-gray-600 w-full" type="text" id="delete" placeholder="image label" />
-                        </label>
-                    </form>
-                    <div className="flex gap-x-4 mt-3">
+                {!loading && <div className="flex flex-col items-center">
+                    <h2 className="font-semibold text-center">Are you sure?</h2>
+
+                    <div className="flex gap-x-4 max-w-[200px] w-full  mt-4 justify-between">
                         <button
-                            className="ml-auto text-sm text-gray-400 hover:text-red-500"
+                            className="text-sm border-2 px-2 py-1 rounded-md hover:border-red-400 text-gray-400 hover:text-red-500"
                             onClick={handleClick}
                         >Cancel</button>
                         <button

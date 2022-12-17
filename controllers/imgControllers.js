@@ -6,9 +6,9 @@ const Image = require('../models/Image')
 const getAllImg = async (req, res) => {
     const images = await Image.find().lean()
 
-    // If no notes 
+    // If no images 
     if (!images?.length) {
-        return res.status(400).json({ message: 'No notes found' })
+        return res.status(400).json({ message: 'No images found' })
     }
     res.send(images)
 }

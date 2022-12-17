@@ -84,3 +84,7 @@ img {
 .hover-img:nth-child(5n -3) {
   grid-row: span 2;
 }
+
+.calc-test {
+  left: calc(48% - 140px);
+}

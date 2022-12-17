@@ -26,7 +26,8 @@ const AddPhotoModal = () => {
 
     // sets label state
     const handleLabelChange = (e: any) => {
-        setLabel(e.target.value)
+        const value = e.target.value
+        setLabel(value)
     }
 
     // sets url state
@@ -70,8 +71,8 @@ const AddPhotoModal = () => {
             .then((resp) => {
                 // remove loading screen
                 setLoading(false)
-                fetchImages()
                 setAddPhotoModal(false)
+                fetchImages()
                 console.log(resp.data)
             })
             .catch((err) => {
@@ -107,8 +108,9 @@ const AddPhotoModal = () => {
 
         // Post the link and label to the db
         if (url && label) {
-            console.log('Posting');
             postData()
+            setUrl('')
+            setLabel('')
         }
 
 
